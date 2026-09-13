@@ -1,0 +1,18 @@
+{
+  "name": "portal-reporte-ciudadano",
+  "version": "1.0.0",
+  "description": "Portal municipal para reportar y gestionar incidencias ciudadanas",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "helmet": "^8.0.0",
+    "mysql2": "^3.11.3",
+    "multer": "^1.4.5-lts.1"
+  }
+}

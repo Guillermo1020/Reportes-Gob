@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gobierno Cercano | Reportes ciudadanos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .tracking-form{display:flex;gap:10px;max-width:620px}.tracking-form input{flex:1}.tracking-result{margin-top:24px;max-width:620px}.tracking-card{background:#fff;border-left:5px solid #aeb8b5;padding:22px}.tracking-card.proceso{border-color:var(--yellow)}.tracking-card.resuelto{border-color:var(--green)}.tracking-card.denegado{border-color:var(--red)}.tracking-card h3{font:700 21px 'Libre Baskerville',serif;margin:0 0 8px}.tracking-card p{color:var(--muted);line-height:1.6}.tracking-status{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal)}.status-groups{display:grid;gap:14px}.status-group{background:#fff;border:1px solid var(--line)}.status-group summary{cursor:pointer;list-style:none;padding:18px 20px;font:700 17px 'Libre Baskerville',serif}.status-group summary::-webkit-details-marker{display:none}.status-group summary:before{content:'+';color:var(--coral);font:700 22px 'DM Sans';margin-right:12px}.status-group[open] summary:before{content:'−'}.status-group .report-grid{padding:0 20px 20px}.status-group.pending{border-top:4px solid #aeb8b5}.status-group.pending .report-card{border-color:#aeb8b5}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#reportar" aria-label="Gobierno Cercano, inicio">
+        <span class="brand-mark">G</span>
+        <span><strong>Gobierno</strong><small>cercano</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="#reportar">Reportar problema</a>
+        <a href="#seguimiento">Seguimiento</a>
+        <a class="nav-button" href="#acceso">Acceso interno</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="reportar">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Atención ciudadana · 24/7</p>
+          <h1>Tlalpan, <em>en buenas manos.</em></h1>
+          <p class="hero-text">Ayúdanos a cuidar los espacios que compartimos. Reporta un problema en tu colonia y dale seguimiento hasta su solución.</p>
+          <div class="hero-note"><span class="pulse-dot"></span><span>Tu reporte llega directamente al área responsable.</span></div>
+        </div>
+        <div class="hero-stamp" aria-hidden="true"><span>Servicio</span><strong>público</strong><span>con propósito</span></div>
+      </div>
+    </section>
+
+    <section class="report-section shell">
+      <div class="section-heading">
+        <div><p class="eyebrow">Nuevo reporte</p><h2>Cuéntanos qué está pasando</h2></div>
+        <p class="required-copy"><span>*</span> Campos obligatorios</p>
+      </div>
+      <form id="report-form" class="report-form">
+        <div class="form-column">
+          <label>Tipo de problema <span>*</span>
+            <select name="category" required>
+              <option value="">Selecciona una categoría</option>
+              <option>Baches</option><option>Luminarias</option><option>Lugares en mal estado</option><option>Basura y limpieza</option><option>Agua y drenaje</option><option>Otro</option>
+            </select>
+          </label>
+          <label>¿Qué sucede? <span>*</span>
+            <textarea name="description" rows="5" maxlength="1000" placeholder="Describe el problema con el mayor detalle posible..." required></textarea>
+          </label>
+          <label>Dirección o referencia <span>*</span>
+            <input name="address" type="text" maxlength="255" placeholder="Calle, número, colonia y municipio" required>
+          </label>
+          <button type="button" id="location-button" class="location-button">⊙ &nbsp; Usar mi ubicación actual</button>
+          <input type="hidden" name="latitude"><input type="hidden" name="longitude">
+        </div>
+        <div class="form-column">
+          <label class="photo-label">Fotografía del problema <span>*</span>
+            <input id="photo-input" name="photo" type="file" accept="image/jpeg,image/png,image/webp" required>
+            <span class="upload-box"><span class="upload-icon">＋</span><strong>Arrastra una foto aquí</strong><small>o haz clic para seleccionar · JPG, PNG o WEBP · máximo 5 MB</small></span>
+          </label>
+          <div id="image-preview" class="image-preview" hidden>
+            <img id="preview-image" alt="Vista previa de la fotografía seleccionada">
+            <p id="preview-name"></p>
+          </div>
+          <div class="optional-fields">
+            <p class="mini-label">Datos de contacto <small>Opcional</small></p>
+            <div class="two-fields"><input name="reporterName" type="text" placeholder="Tu nombre"><input name="reporterEmail" type="email" placeholder="Tu correo electrónico"></div>
+          </div>
+          <button class="primary-button" type="submit">Enviar reporte <span>→</span></button>
+          <p id="report-message" class="form-message" role="status"></p>
+        </div>
+      </form>
+    </section>
+
+    <section id="seguimiento" class="follow-section">
+      <div class="shell">
+        <div class="follow-grid"><div><p class="eyebrow">Transparencia y respuesta</p><h2>Sigue tu caso.</h2></div><p>Escribe el folio que recibiste al enviar tu reporte sin el "#". El estado se actualizará automáticamente cuando el equipo municipal avance con tu caso.</p></div>
+        <form id="tracking-form" class="tracking-form"><input name="folio" type="number" min="1" placeholder="Folio de caso, por ejemplo: 24" required><button class="primary-button" type="submit">Consultar folio <span>→</span></button></form>
+        <div id="tracking-result" class="tracking-result" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="acceso" class="admin-section shell">
+      <div class="section-heading"><div><p class="eyebrow">Gestión gubernamental</p><h2>Panel de seguimiento</h2></div><p class="required-copy">Acceso exclusivo para personal autorizado</p></div>
+      <div id="login-view" class="login-panel"><div><h3>Acceso interno</h3><p>Consulta y actualiza los reportes recibidos.</p></div><form id="login-form"><input name="username" placeholder="Usuario" autocomplete="username" required><input name="password" type="password" placeholder="Contraseña" autocomplete="current-password" required><button class="primary-button" type="submit">Ingresar <span>→</span></button><p id="login-message" class="form-message" role="alert"></p></form></div>
+      <div id="dashboard-view" hidden><div class="dashboard-toolbar"><div id="status-summary" class="status-summary"></div><button id="logout-button" class="outline-button">Cerrar sesión</button></div><div id="report-groups" class="status-groups"></div></div>
+    </section>
+  </main>
+  <footer><div class="shell"><span>Gobierno Cercano</span><span>Una ciudad que se cuida, se construye entre todas y todos.</span></div></footer>
+  <script src="/app.js"></script>
+</body>
+</html>
