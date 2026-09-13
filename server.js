@@ -171,4 +171,4 @@ app.use('/api', (_request, response) => response.status(404).json({ error: 'Ruta
 app.get('*', (_request, response) => response.sendFile(path.join(__dirname, 'public', 'index.html')));
 
 // Inicia el servidor HTTP y avisa en qué dirección está disponible.
-app.listen(PORT, () => console.log(`Portal Gob abierto en http://localhost:${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Portal Gob abierto en el puerto ${PORT}`));
