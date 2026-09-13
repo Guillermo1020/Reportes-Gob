@@ -10,7 +10,6 @@ Portal web para registrar problemas de la ciudad y gestionarlos desde un panel m
 4. Ejecuta `npm install` y después `npm start`.
 5. Abre `http://localhost:3000`.
 
-El acceso interno usa por defecto `Gob2007` y `elgobiernopublico`, pero se pueden cambiar en `.env`. En producción también debes cambiar `SESSION_SECRET`, usar HTTPS y guardar las credenciales fuera del código.
 
 ## Secciones
 
