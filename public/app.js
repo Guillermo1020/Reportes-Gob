@@ -108,7 +108,21 @@ async function loadReports() {
 
 function renderReport(report) {
   const date = new Date(report.created_at).toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
-  return `<article class="report-card ${report.status}"><div class="report-photo" style="background-image:url('${report.photo_path}')"></div><h4>#${report.id} · ${escapeHtml(report.address)}</h4><p>${escapeHtml(report.description)}</p><p class="card-meta">${report.status} · ${date}</p><div class="status-buttons"><button data-id="${report.id}" data-status="resuelto">Caso resuelto</button><button data-id="${report.id}" data-status="proceso">En proceso</button><button data-id="${report.id}" data-status="denegado">Denegado</button></div></article>`;
+  const reporterName = report.reporter_name ? escapeHtml(report.reporter_name) : 'Anónimo';
+  const reporterPhone = report.reporter_phone ? escapeHtml(report.reporter_phone) : 'No proporcionado';
+
+  return `<article class="report-card ${report.status}">
+    <div class="report-photo" style="background-image:url('${report.photo_path}')"></div>
+    <h4>#${report.id} · ${escapeHtml(report.address)}</h4>
+    <p>${escapeHtml(report.description)}</p>
+    <p class="card-meta"><strong>Reportó:</strong> ${reporterName} | <strong>Tel:</strong> ${reporterPhone}</p>
+    <p class="card-meta">${report.status} · ${date}</p>
+    <div class="status-buttons">
+      <button data-id="${report.id}" data-status="resuelto">Caso resuelto</button>
+      <button data-id="${report.id}" data-status="proceso">En proceso</button>
+      <button data-id="${report.id}" data-status="denegado">Denegado</button>
+    </div>
+  </article>`;
 }
 
 // Muestra el estado actual de un folio sin pedir autenticación al ciudadano.
