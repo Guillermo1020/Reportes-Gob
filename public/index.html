@@ -71,10 +71,10 @@
             <img id="preview-image" alt="Vista previa de la fotografía seleccionada">
             <p id="preview-name"></p>
           </div>
-          <div class="optional-fields">
-            <p class="mini-label">Datos de contacto <small>Opcional</small></p>
-            <div class="two-fields"><input name="reporterName" type="text" placeholder="Tu nombre"><input name="reporterEmail" type="email" placeholder="Tu correo electrónico"></div>
-          </div>
+          <div class="two-fields">
+    <input name="reporterName" type="text" placeholder="Tu nombre" required>
+    <input name="reporterPhone" type="tel" placeholder="Número de teléfono (10 dígitos)" required>
+</div>
           <button class="primary-button" type="submit">Enviar reporte <span>→</span></button>
           <p id="report-message" class="form-message" role="status"></p>
         </div>

@@ -74,18 +74,18 @@ const allowedStatuses = ['pendiente', 'proceso', 'resuelto', 'denegado'];
 
 // Crea un reporte público y guarda su fotografía y sus datos en MySQL.
 app.post('/api/reports', upload.single('photo'), async (request, response) => {
-  const { category, description, address, latitude, longitude, reporterName, reporterEmail } = request.body;
-  if (!request.file || !allowedCategories.includes(category) || !description || !address) {
+  const { category, description, address, latitude, longitude, reporterName, reporterPhone } = request.body;
+  if (!request.file || !allowedCategories.includes(category) || !description || !address || !reporterName || !reporterPhone) {
     if (request.file) fs.unlinkSync(request.file.path);
-    return response.status(400).json({ error: 'Categoría, descripción, dirección y fotografía son obligatorias.' });
+    return response.status(400).json({ error: 'Categoría, descripción, dirección, fotografía, nombre y teléfono son obligatorias.' });
   }
 
   try {
     const [result] = await pool.execute(
-      `INSERT INTO reports (category, description, address, latitude, longitude, reporter_name, reporter_email, photo_path, status)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pendiente')`,
+      `INSERT INTO reports (category, description, address, latitude, longitude, reporter_name, reporter_phone, photo_path, status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pendiente')`,
       [category, description.trim(), address.trim(), latitude || null, longitude || null,
-        reporterName?.trim() || null, reporterEmail?.trim() || null, `/uploads/${request.file.filename}`]
+        reporterName?.trim() || null, reporterPhone?.trim() || null, `/uploads/${request.file.filename}`]
     );
     response.status(201).json({ id: result.insertId, message: 'Reporte recibido correctamente.' });
   } catch (error) {
